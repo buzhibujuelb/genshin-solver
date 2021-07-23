@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+
+    <h1>原神方块解密</h1>
+
+    <p>请输入 0 到 3 之间的花瓣数：</p>
+    <input id="a">
+    <input id="b">
+    <input id="c">
+    <input id="d">
+    <button type="button" onclick="myFunction()">提交</button>
+    <p id="demo"></p>
+    <script>
+      function myFunction() {
+        var a,b,c,d,text="";
+        a = Number(document.getElementById("a").value);
+        b = Number(document.getElementById("b").value);
+        c = Number(document.getElementById("c").value);
+        d = Number(document.getElementById("d").value);
+
+        for(var tot=0;tot<=12;tot++)
+          for(var x=0;x<4&&x<=tot;x++)
+            for(var y=0;y<4&&x+y<=tot;y++)
+              for(var z=0;z<4&&x+y+z<=tot;z++){	
+                if (d==null || d==""){
+                  var e=(x+y+a)%4,f=(x+y+z+b)%4,g=(y+z+c)%4;
+                  if(g==e && e==f){
+                    text="次数为 "+x+" "+y+" "+z;
+                    document.getElementById("demo").innerHTML = text;
+                    return;
+                  }
+                }else{
+                  for(var t=0;t<4&&x+y+z+t<=tot;t++){
+                    var e=(x+y+a)%4,f=(x+y+z+b)%4,g=(y+z+t+c)%4,h=(z+t+d)%4;
+                    if(e==f && e==g && e==h){
+                      text="次数为 "+x+" "+y+" "+z+" "+t;
+                      document.getElementById("demo").innerHTML = text;
+                      return;
+                    }
+                  }
+                }
+              }
+        document.getElementById("demo").innerHTML = "无解";
+      }
+    </script>
+
+  </body>
+</html>
